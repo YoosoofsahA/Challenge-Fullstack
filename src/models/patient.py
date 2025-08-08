@@ -34,3 +34,20 @@ class Patient:
             ]
         else:
             self.prior_treatments = []
+
+
+    def to_dict(self) -> dict:
+        """
+        Convert patient data to a dictionary
+        """
+        return {
+            "patient_id": self.patient_id,
+            "age": self.age,
+            "gender": self.gender,
+            "cancer_type": self.cancer_type,
+            "stage": self.stage,
+            "biomarkers": self.biomarkers,
+            "location": self.location,
+            "ecog_status": self.ecog_status,
+            "prior_treatments": self.prior_treatments
+        }
