@@ -13,21 +13,29 @@ class TrialMatchingEvaluator:
     
     def __init__(self):
         # TODO: Get this information from medical documantation/database
+        raw_biomarker_mappings = {
+            'HER2+': ['trastuzumab', 'pertuzumab', 'ado-trastuzumab', 'fam-trastuzumab'],
+            'EGFR+': ['erlotinib', 'gefitinib', 'osimertinib', 'afatinib'],
+            'KRAS G12C': ['sotorasib', 'adagrasib'],
+            'BRAF V600E': ['vemurafenib', 'dabrafenib', 'encorafenib'],
+            'ALK+': ['crizotinib', 'alectinib', 'ceritinib', 'brigatinib'],
+            'ROS1+': ['crizotinib', 'entrectinib'],
+            'NTRK+': ['larotrectinib', 'entrectinib'],
+            'PD-L1+': ['pembrolizumab', 'nivolumab', 'atezolizumab', 'durvalumab'],
+            'MSI-H': ['pembrolizumab', 'nivolumab'],
+            'BRCA1/2': ['olaparib', 'rucaparib', 'niraparib', 'talazoparib'],
+            'PIK3CA': ['alpelisib'],
+            'CDK4/6': ['palbociclib', 'ribociclib', 'abemaciclib']
+        }
+        
+        # Normalize biomarker keys for consistent lookup
+        normalized_biomarker_mappings = {}
+        for biomarker, drugs in raw_biomarker_mappings.items():
+            normalized_key = biomarker.strip().replace(' ', '').lower()
+            normalized_biomarker_mappings[normalized_key] = drugs
+        
         self.medical_knowledge_base = {
-            'biomarker_drug_mappings': {
-                'HER2+': ['trastuzumab', 'pertuzumab', 'ado-trastuzumab', 'fam-trastuzumab'],
-                'EGFR+': ['erlotinib', 'gefitinib', 'osimertinib', 'afatinib'],
-                'KRAS G12C': ['sotorasib', 'adagrasib'],
-                'BRAF V600E': ['vemurafenib', 'dabrafenib', 'encorafenib'],
-                'ALK+': ['crizotinib', 'alectinib', 'ceritinib', 'brigatinib'],
-                'ROS1+': ['crizotinib', 'entrectinib'],
-                'NTRK+': ['larotrectinib', 'entrectinib'],
-                'PD-L1+': ['pembrolizumab', 'nivolumab', 'atezolizumab', 'durvalumab'],
-                'MSI-H': ['pembrolizumab', 'nivolumab'],
-                'BRCA1/2': ['olaparib', 'rucaparib', 'niraparib', 'talazoparib'],
-                'PIK3CA': ['alpelisib'],
-                'CDK4/6': ['palbociclib', 'ribociclib', 'abemaciclib']
-            },
+            'biomarker_drug_mappings': normalized_biomarker_mappings,
             'cancer_synonyms': {
                 'breast cancer': ['breast carcinoma', 'mammary carcinoma', 'breast neoplasm'],
                 'lung cancer': ['pulmonary carcinoma', 'lung carcinoma', 'bronchogenic carcinoma', 'nsclc', 'non-small cell lung cancer'],
