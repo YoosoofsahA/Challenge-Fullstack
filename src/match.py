@@ -134,9 +134,6 @@ def extract_patient_clinical_trial_criteria(patient_id: str) -> dict:
     
     return parsed_response
 
-# Load trial data - list of trials for that condition
-
-# Get LLM to embed and enhance trial data to extract relevant information
 
 # Match patients to trials using LLM to score and rank trials
 def match_patient_to_trials(patient_id: str) -> list:
@@ -221,8 +218,6 @@ def evaluate_matches(trial_scores: list, patient_data: dict, trial_data: list) -
     
     return combined_results
 
-# Return results in ranked list of trials for that patient
-
 
 def main():
     parser = argparse.ArgumentParser(description='Match patients to clinical trials')
@@ -274,51 +269,6 @@ def main():
         
         if trial_info.get('confidence_reasoning'):
             print(f"  Confidence reasoning: {trial_info.get('confidence_reasoning', 'N/A')}")
-        print()
-
-    # patient_data = load_patient_data(args.patient_id)
-    # print(patient_data)
-
-    # clinical_trial_criteria = extract_patient_clinical_trial_criteria(args.patient_id)
-    # print(clinical_trial_criteria)
-
-    # try:
-    #     # Get trial data as JSON
-    #     trial_data = asyncio.run(find_trials('cancer'))
-    #     print(f"Raw trial data type: {type(trial_data)}")
-        
-    #     if trial_data:
-    #         # Parse the JSON response
-    #         try:
-    #             print(f"Parsed JSON data type: {type(trial_data)}")
-
-    #             print("=" * 50)
-    #             print("Trial data:")
-
-    #             print(trial_data)
-
-    #             print("=" * 50)
-
-    #             print(f"Number of trials found: {len(trial_data)}")
-                
-    #             # Print all trials
-    #             for i, trial in enumerate(trial_data):
-    #                 print(f"\n=== TRIAL {i+1} ===")
-    #                 if isinstance(trial, dict):
-    #                     print(json.dumps(trial, indent=2))
-    #                 else:
-    #                     print(str(trial))
-    #                 print("=" * 50)
-                    
-    #         except json.JSONDecodeError as e:
-    #             print(f"Error parsing JSON: {e}")
-    #             print(f"Raw response: {trial_data_json[:500]}...")
-    #     else:
-    #         print("No trial data returned")
-    # except Exception as e:
-    #     print(f"Error getting trial data: {e}")
-    #     import traceback
-    #     traceback.print_exc()
 
 
 if __name__ == '__main__':

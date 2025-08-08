@@ -29,3 +29,4 @@ async def find_trials(condition: str) -> list:
     return trials_data
 
 # TODO: Make search function more directed to the patient's cancer type
+# Notice the trials are not always cancer-related, so need to filter them
