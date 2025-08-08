@@ -17,7 +17,7 @@ This is a coding challenge designed to test your ability to turn raw oncology da
      ```  
      returns a ranked list of NCT IDs.
 
-
+Note, to run you will also need ollama installed and a model e.g. `llama3.2:8b  ` installed.
 
 ## 2  Repo skeleton
 ```bash
