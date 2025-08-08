@@ -17,20 +17,24 @@ class Patient:
     prior_treatments: str  # Raw string from CSV, will be parsed
 
     def __post_init__(self):
+        import pandas as pd
+        
         # Parse biomarkers (semicolon-separated)
-        if self.biomarkers:
+        if self.biomarkers and not pd.isna(self.biomarkers):
             self.biomarkers = [
                 biomarker.strip() 
                 for biomarker in self.biomarkers.split(';')
+                if biomarker.strip()
             ]
         else:
             self.biomarkers = []
         
         # Parse prior_treatments (comma-separated)
-        if self.prior_treatments:
+        if self.prior_treatments and not pd.isna(self.prior_treatments):
             self.prior_treatments = [
                 treatment.strip() 
                 for treatment in self.prior_treatments.split(',')
+                if treatment.strip()
             ]
         else:
             self.prior_treatments = []
